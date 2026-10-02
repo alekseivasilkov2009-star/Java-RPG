@@ -15,9 +15,11 @@ public class Character {
     int BleedingTurns;
     int MaxMana;
     int Mana;
+    int Speed;
     boolean CanBePoisoned = true;
     boolean CanBleed = true;
 
+    List<Character> allies = new ArrayList<>();
     List<Spell> spells = new ArrayList<>();
 
     HashMap<String, Object> Characteristic = new HashMap<>();
@@ -49,5 +51,9 @@ public class Character {
         }
 
         Characteristic.put(ResistanceName, Resistance);
+    }
+
+    void AddAlly(Character ally) {
+        allies.add(ally);
     }
 }

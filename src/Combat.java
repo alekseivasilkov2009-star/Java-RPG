@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Combat {
-    Enemy enemy = new Enemy( "Skeleton", 100,  100, 100, 0, 0, false, true, 10);
+    Enemy enemy = Enemies.Skeleton();
 
     Scanner scanner = new Scanner(System.in);
 
