@@ -3,33 +3,60 @@ import java.util.HashMap;
 public class Spell {
     HashMap<String, Object> data = new HashMap<>();
 
-    void CastSpell(Spell spell, Character caster, Character target) {
-        if (caster.Mana >= (int) spell.data.get("NeededMana")) {
-            if (spell.data.containsKey("Damage")) {
-                target.TakeDamage((int) spell.data.get("Damage") * caster.SpellDamage / 100, (String) spell.data.get("DamageType"));
-            }
+    String SpellName;
 
-            if (spell.data.containsKey("StunTurns")) {
-                target.StunTurns += (int) spell.data.get("StunTurns");
-            }
+    void castSpell(Character caster, Character target) {
 
-            if (spell.data.containsKey("Heal")) {
-                caster.Heal((int) spell.data.get("Heal"));
-            }
+        if (this.data.containsKey("Damage")) {
+            target.takeDamage((int) this.data.get("Damage") / 100, caster.CurrentDamageOutput, false);
+        }
 
-            if (spell.data.containsKey("PoisonTurns") && target.CanBePoisoned) {
-                if (target.CanBePoisoned) {
-                    target.PoisonTurns += (int) spell.data.get("PoisonTurns");
-                }
-            }
-
-            if (spell.data.containsKey("BleedingTurns") && target.CanBleed) {
-                if (target.CanBleed) {
-                    target.BleedingTurns += (int) spell.data.get("BleedingTurns");
-                }
+        if (this.data.containsKey("StunTurns")) {
+            if (!caster.StunFail) {
+                target.StunTurns += (int) this.data.get("StunTurns");
+                caster.StunFail = true;
+            } else {
+                caster.StunFail = false;
             }
         }
 
+        if (this.data.containsKey("Heal")) {
+            caster.heal((int) this.data.get("Heal"));
+        }
+
+        if (this.data.containsKey("PoisonTurns") && target.CanPoison) {
+            target.PoisonTurns += (int) this.data.get("PoisonTurns");
+            target.PoisonDamage += (int) this.data.get("PoisonDamage");
+        }
+
+        if (this.data.containsKey("BleedingTurns") && target.CanBleed) {
+            target.BleedingTurns += (int) this.data.get("BleedingTurns");
+            target.BleedDamage += (int) this.data.get("BleedDamage");
+        }
+
+        if (this.data.containsKey("SpeedSetup")) {
+            caster.SpeedSetup += (int) this.data.get("SpeedSetup");
+        }
+
+        if (this.data.containsKey("DamageSetup")) {
+            caster.DamageSetup += (int) this.data.get("DamageSetup");
+        }
+
+        if (this.data.containsKey("ProtectionSetup")) {
+            caster.ProtectionSetup += (int) this.data.get("ProtectionSetup");
+        }
+
+        if (this.data.containsKey("EnemySpeedSetup")) {
+            target.SpeedSetup += (int) this.data.get("EnemySpeedSetup");
+        }
+
+        if (this.data.containsKey("EnemyDamageSetup")) {
+            target.DamageSetup += (int) this.data.get("EnemyDamageSetup");
+        }
+
+        if (this.data.containsKey("EnemyProtectionSetup")) {
+            target.ProtectionSetup += (int) this.data.get("EnemyProtectionSetup");
+        }
     }
 
 }

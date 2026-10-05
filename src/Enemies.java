@@ -1,46 +1,111 @@
+import java.util.Random;
+
 public class Enemies {
 
-    static Enemy Skeleton() {
-        return new Enemy(
+    static Random random = new Random();
+
+    static Enemy skeleton() {
+        Enemy skeleton = new Enemy(
                 "Skeleton",
+                75,
                 100,
                 100,
-                100,
-                0,
                 0,
                 false,
-                true,
-                10,
-                10);
+                true);
+        skeleton.addSpell(Spells.bluntHit());
+        skeleton.addSpell(Spells.bumpHit());
+
+        return skeleton;
     }
 
-    static Enemy Bear() {
-        return new Enemy(
+    static Enemy bear() {
+        Enemy bear = new Enemy(
                 "Bear",
-                200,
-                100,
-                100,
-                0,
-                0,
+                150,
+                150,
+                30,
+                5,
                 true,
-                true,
-                0,
-                10);
+                true);
+
+        bear.addSpell(Spells.growl());
+        bear.addSpell(Spells.bite());
+        bear.addSpell(Spells.scratch());
+
+        return bear;
     }
 
-    static Enemy Rat() {
-        return new Enemy(
+    static Enemy rat() {
+        Enemy rat = new Enemy(
                 "Rat",
                 50,
-                100,
-                100,
+                50,
                 0,
-                0,
+                10,
                 true,
-                true,
-                0,
-                10);
+                true);
+
+        rat.addSpell(Spells.bite());
+        rat.addSpell(Spells.scratch());
+        for (Spell spell : rat.spells) {
+            spell.data.put("PoisonTurns", 3);
+            spell.data.put("PoisonDamage", 1);
+        }
+
+        return rat;
     }
 
+    static Enemy golem() {
+        Enemy golem = new Enemy(
+                "Golem",
+                100,
+                100,
+                60,
+                0,
+                false,
+                false);
 
+        golem.addSpell(Spells.avalanche());
+        golem.addSpell(Spells.rockSlam());
+
+        return golem;
+    }
+
+    static Enemy webber() {
+        Enemy webber = new Enemy(
+                "Webber",
+                60,
+                100,
+                5,
+                10,
+                true,
+                true);
+
+        webber.addSpell(Spells.bite());
+        webber.addSpell(Spells.web());
+
+        return webber;
+    }
+
+    static Enemy venomousWebber() {
+        Enemy venomousWebber = new Enemy(
+                "Venomous Webber",
+                60,
+                100,
+                0,
+                15,
+                true,
+                true);
+
+        venomousWebber.addSpell(Spells.bite());
+        venomousWebber.addSpell(Spells.web());
+
+        for (Spell spell : venomousWebber.spells) {
+            spell.data.put("PoisonTurns", 3);
+            spell.data.put("PoisonDamage", 2);
+        }
+
+        return venomousWebber;
+    }
 }

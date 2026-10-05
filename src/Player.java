@@ -13,45 +13,60 @@ public class Player extends Character{
     int SellingMultiplier = 1;
     int Gold = 0;
     int InventoryCapacity = 20;
+    int CampaignProgress = 0;
 
-    void ChangeGold(int GoldValue) {
+    void changeGold(int GoldValue) {
         Gold += GoldValue;
         if (Gold < 0) {
             Gold = 0;
         }
     }
 
-    void AddSpell(Spell spell) {
-        spells.add(spell);
-        System.out.println(Name+" has received the "+spell.data.get("Name")+"!");
+    void sellItems() {
+        for (Item item : inventory) {
+            inventory.remove(item);
+            Gold += item.GoldWorth * SellingMultiplier;
+        }
     }
 
-    void AddPartyMember(Character partyMember) {
+    void addPartyMember(Character partyMember) {
         if (party.size() < 4) {
             party.add(partyMember);
         }
     }
 
-    void RemovePartyMember(Character partyMember) {
+    void removePartyMember(Character partyMember) {
         party.remove(partyMember);
     }
 
-    void AddItem(Item item) {
+    void addItem(Item item) {
         if (inventory.size() < InventoryCapacity) {
             inventory.add(item);
         }
     }
 
-    void RemoveItem(Item item) {
+    void removeItem(Item item) {
         inventory.remove(item);
     }
 
-    void IncreaseExp(int experience) {
+    void increaseExp(int experience) {
         int FinalExp = Experience + (experience * ExpMultiplier);
         if (FinalExp >= NeededExperience) {
             int excess = Experience - NeededExperience;
             Experience = excess;
             Level ++;
         }
+    }
+
+    void setUpPlayer(String name) {
+        this.Name = name;
+        this.MaxHealth = 100;
+        this.Health = MaxHealth;
+        this.Protection = 100;
+        this.DamageOutput = 0;
+        this.CurrentProtection = Protection;
+        this.CurrentDamageOutput = DamageOutput;
+        this.Speed = 20;
+        this.CurrentSpeed = Speed;
     }
 }

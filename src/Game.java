@@ -10,11 +10,9 @@ public class Game{
         player.Name = scanner.nextLine();
         System.out.println("Your name is "+player.Name+" now.");
 
-        Spell SwordAttack = new Spell();
-        SwordAttack.data.put("Name", "Sword Attack");
-        SwordAttack.data.put("DamageType", "Physical");
-        SwordAttack.data.put("Damage", 5);
-        SwordAttack.data.put("NeededMana", 0);
-        player.AddSpell(SwordAttack);
+        Spell swordAttack = new Spell();
+        swordAttack.data.put("Name", "Sword Attack");
+        swordAttack.data.put("Damage", 10);
+        player.addSpell(swordAttack);
     }
 }
