@@ -9,7 +9,7 @@ public class Enemies {
                 "Skeleton",
                 75,
                 100,
-                100,
+                0,
                 0,
                 false,
                 true);

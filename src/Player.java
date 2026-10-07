@@ -6,6 +6,10 @@ public class Player extends Character{
     List<Character> party = new ArrayList<>();
     List<Item> inventory = new ArrayList<>();
 
+    int SpellPrice = 1000;
+    int DamagePrice = 100;
+    int DurabilityPrice = 100;
+
     int Level = 1;
     int Experience = 0;
     int NeededExperience = 100;
@@ -32,6 +36,8 @@ public class Player extends Character{
     void addPartyMember(Character partyMember) {
         if (party.size() < 4) {
             party.add(partyMember);
+        } else {
+            System.out.println("Your party is full right now, therefore the "+partyMember.Name+" couldn't join you.");
         }
     }
 
@@ -58,12 +64,11 @@ public class Player extends Character{
         }
     }
 
-    void setUpPlayer(String name) {
-        this.Name = name;
+    void setUpPlayer() {
         this.MaxHealth = 100;
         this.Health = MaxHealth;
-        this.Protection = 100;
-        this.DamageOutput = 0;
+        this.Protection = 0;
+        this.DamageOutput = 100;
         this.CurrentProtection = Protection;
         this.CurrentDamageOutput = DamageOutput;
         this.Speed = 20;

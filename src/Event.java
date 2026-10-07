@@ -7,32 +7,49 @@ public class Event {
 
     static Random random = new Random();
 
-    void fight(Player player) {
+    void fight(Player player, Scanner scanner) {
         Combat fight = new Combat();
-        fight.startFight(player, false);
+        fight.startFight(player, false, scanner);
     }
 
-    void bossFight(Player player) {
+    void bossFight(Player player, Scanner scanner) {
         Combat fight = new Combat();
-        fight.startFight(player, true);
+        fight.startFight(player, true, scanner);
     }
 
-    void village(Player player) {
+    static TraderGood trader = new TraderGood();
+
+    void village(Player player, Scanner scanner) {
         System.out.println("You've reached a small village. There you rest for a while, restoring your health fully. On the village's market you could buy something useful...");
         player.sellItems();
         player.heal(player.MaxHealth);
         player.CampaignProgress ++;
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("At the market you see various goods. Your eye is caught by a adventurer trader that has everything, from spells to equipment.");
+        System.out.println("Type 1 to buy a random spell that the trader has to offer\nType 2 to buy an upgrade for your damage output\nType 3 to buy an upgrade for your survivability\nType 4 to leave");
 
-        System.out.println("At the market you see various goods. Your eye is caught by a adventurer trader that has everything, from spells to equipment.\nType in 1-4 for the corresponding item that is offered or 5 to leave and go on with your adventures.");
+        int choice;
+
         while (!scanner.hasNextInt()) {
-            System.out.println("Please type in a number!");
-            scanner.nextLine();
+            System.out.println("Please type in a valid option!");
+            scanner.next();
         }
 
-        if (scanner.nextInt() == 1) {
+        choice = scanner.nextInt();
 
+        while (choice < 1 || choice > 4) {
+            System.out.println("Please type in a valid option!");
+            choice = scanner.nextInt();
+        }
+
+        if (choice == 1) {
+            trader.getRandomSpell(player);
+        } else if (choice == 2) {
+            trader.upgradeDamage(player);
+        } else if (choice == 3) {
+            trader.upgradeProtection(player);
+        } else if (choice == 4) {
+            System.out.println("You leave the village...");
         }
     }
 
@@ -59,21 +76,26 @@ public class Event {
         }
     }
 
-    void startEventLoop(Player player) {
+    void startEventLoop(Player player, Scanner scanner) {
 
-        while (player.Alive) {
+        while (player.Alive && player.CampaignProgress < 100) {
             int randomEvent = random.nextInt(1, 11);
 
             if (randomEvent <= 6) {
-                if (player.CampaignProgress >= 95) {
-                    fight(player);
+                if (player.CampaignProgress < 90) {
+                    fight(player, scanner);
+                } else {
+                    bossFight(player, scanner);
                 }
             } else if (randomEvent > 6 && randomEvent < 8) {
-                village(player);
+                village(player, scanner);
             } else if (randomEvent > 8) {
                 camp(player);
             }
         }
 
+        if (player.Alive && player.CampaignProgress == 100) {
+            System.out.println("YOU WON!");
+        }
     }
 }

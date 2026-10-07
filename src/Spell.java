@@ -7,8 +7,10 @@ public class Spell {
 
     void castSpell(Character caster, Character target) {
 
+        System.out.println(caster.Name+" has used "+this.SpellName+"!");
+
         if (this.data.containsKey("Damage")) {
-            target.takeDamage((int) this.data.get("Damage") / 100, caster.CurrentDamageOutput, false);
+            target.takeDamage((int) this.data.get("Damage"), false);
         }
 
         if (this.data.containsKey("StunTurns")) {

@@ -11,8 +11,13 @@ public class Game{
         System.out.println("Your name is "+player.Name+" now.");
 
         Spell swordAttack = new Spell();
-        swordAttack.data.put("Name", "Sword Attack");
-        swordAttack.data.put("Damage", 10);
+        swordAttack.SpellName = "Sword Attack";
+        swordAttack.data.put("Damage", 25);
         player.addSpell(swordAttack);
+        player.addPartyMember(player);
+        player.setUpPlayer();
+
+        Event event = new Event();
+        event.startEventLoop(player, scanner);
     }
 }

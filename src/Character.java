@@ -35,10 +35,10 @@ public class Character {
     List<Character> foes = new ArrayList<>();
     List<Spell> spells = new ArrayList<>();
 
-    void takeDamage(int damage, int damageMultiplier, boolean isTickDamage) {
+    void takeDamage(int damage, boolean isTickDamage) {
         int finalDamage;
         if (!isTickDamage) {
-            finalDamage = (damage * damageMultiplier) - (damage * Protection / 100);
+            finalDamage = damage * DamageOutput / 100 - (damage * Protection / 100);
         } else {
             finalDamage = damage;
         }
@@ -57,28 +57,12 @@ public class Character {
         }
     }
 
-    void changeResistance(int protectionValue) {
-        Protection += protectionValue;
-
-        if (Protection >= 100) {
-            Protection = 99;
-        }
-    }
-
     void addAlly(Character ally) {
         allies.add(ally);
     }
 
-    void removeAlly(Character ally) {
-        allies.remove(ally);
-    }
-
     void addFoe(Character foe) {
         foes.add(foe);
-    }
-
-    void removeFoe(Character foe) {
-        foes.remove(foe);
     }
 
     void turnStatuses() {
@@ -88,12 +72,14 @@ public class Character {
 
         if (BleedingTurns > 0) {
             BleedingTurns --;
-            takeDamage(BleedDamage + (MaxHealth * 2 / 100), 100, true);
+            takeDamage(BleedDamage + (MaxHealth * 2 / 100), true);
+            System.out.println(Name+" took "+BleedDamage + (MaxHealth * 2 / 100)+" bleed damage, this will last for another "+BleedingTurns+" turns!");
         }
 
         if (PoisonTurns > 0) {
             PoisonTurns --;
-            takeDamage(PoisonDamage, 100, true);
+            takeDamage(PoisonDamage, true);
+            System.out.println(Name+" took "+PoisonDamage+" poison damage, this will last for another "+PoisonTurns+" turns!");
         }
 
         if (SpeedSetup > 0) {
@@ -114,12 +100,6 @@ public class Character {
 
     void addSpell(Spell spell) {
         spells.add(spell);
-        System.out.println(Name+" has received the "+spell.data.get("Name")+"!");
-    }
-
-    void removeSpell(Spell spell) {
-        spells.remove(spell);
-        System.out.println(Name+" has removed the "+spell.data.get("Name")+"!");
     }
 
     void clearCharacter() {
