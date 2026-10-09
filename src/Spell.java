@@ -10,7 +10,7 @@ public class Spell {
         System.out.println(caster.Name+" has used "+this.SpellName+"!");
 
         if (this.data.containsKey("Damage")) {
-            target.takeDamage((int) this.data.get("Damage"), false);
+            target.takeDamage((int) this.data.get("Damage") * caster.DamageOutput / 100, false);
         }
 
         if (this.data.containsKey("StunTurns")) {
@@ -36,28 +36,28 @@ public class Spell {
             target.BleedDamage += (int) this.data.get("BleedDamage");
         }
 
-        if (this.data.containsKey("SpeedSetup")) {
-            caster.SpeedSetup += (int) this.data.get("SpeedSetup");
+        if (this.data.containsKey("SpeedSetUp")) {
+            caster.SpeedSetup += (int) this.data.get("SpeedSetUp");
         }
 
-        if (this.data.containsKey("DamageSetup")) {
-            caster.DamageSetup += (int) this.data.get("DamageSetup");
+        if (this.data.containsKey("DamageSetUp")) {
+            caster.DamageSetup += (int) this.data.get("DamageSetUp");
         }
 
-        if (this.data.containsKey("ProtectionSetup")) {
-            caster.ProtectionSetup += (int) this.data.get("ProtectionSetup");
+        if (this.data.containsKey("ProtectionSetUp")) {
+            caster.ProtectionSetup += (int) this.data.get("ProtectionSetUp");
         }
 
-        if (this.data.containsKey("EnemySpeedSetup")) {
-            target.SpeedSetup += (int) this.data.get("EnemySpeedSetup");
+        if (this.data.containsKey("EnemySpeedSetUp")) {
+            target.SpeedSetup += (int) this.data.get("EnemySpeedSetUp");
         }
 
-        if (this.data.containsKey("EnemyDamageSetup")) {
-            target.DamageSetup += (int) this.data.get("EnemyDamageSetup");
+        if (this.data.containsKey("EnemyDamageSetUp")) {
+            target.DamageSetup += (int) this.data.get("EnemyDamageSetUp");
         }
 
-        if (this.data.containsKey("EnemyProtectionSetup")) {
-            target.ProtectionSetup += (int) this.data.get("EnemyProtectionSetup");
+        if (this.data.containsKey("EnemyProtectionSetUp")) {
+            target.ProtectionSetup += (int) this.data.get("EnemyProtectionSetUp");
         }
     }
 

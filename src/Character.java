@@ -38,7 +38,7 @@ public class Character {
     void takeDamage(int damage, boolean isTickDamage) {
         int finalDamage;
         if (!isTickDamage) {
-            finalDamage = damage * DamageOutput / 100 - (damage * Protection / 100);
+            finalDamage = damage - (damage * Protection / 100);
         } else {
             finalDamage = damage;
         }
@@ -72,8 +72,8 @@ public class Character {
 
         if (BleedingTurns > 0) {
             BleedingTurns --;
-            takeDamage(BleedDamage + (MaxHealth * 2 / 100), true);
-            System.out.println(Name+" took "+BleedDamage + (MaxHealth * 2 / 100)+" bleed damage, this will last for another "+BleedingTurns+" turns!");
+            takeDamage(BleedDamage, true);
+            System.out.println(Name+" took "+BleedDamage+" bleed damage, this will last for another "+BleedingTurns+" turns!");
         }
 
         if (PoisonTurns > 0) {
@@ -86,15 +86,9 @@ public class Character {
             CurrentSpeed = Speed + (5 * SpeedSetup);
         }
 
-        if (DamageSetup > 0) {
+        CurrentDamageOutput = DamageOutput + (10 * DamageSetup);
 
-            CurrentDamageOutput = DamageOutput + (10 * DamageSetup);
-        }
-
-        if (ProtectionSetup > 0) {
-
-            CurrentProtection = Protection + (10 * ProtectionSetup);
-        }
+        CurrentProtection = Protection + (10 * ProtectionSetup);
 
     }
 

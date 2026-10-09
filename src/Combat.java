@@ -31,8 +31,6 @@ public class Combat {
             }
             player.addFoe(enemy);
             enemyAmount --;
-            System.out.println(enemy.Name+":\n"+enemy.Health+"/"+enemy.MaxHealth+"\nDamage: "+enemy.CurrentDamageOutput+"\nProtection: "+enemy.CurrentProtection+"\nSpeed: "+enemy.CurrentSpeed+"\n");
-
         }
     }
 

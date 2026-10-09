@@ -7,7 +7,7 @@ public class Enemies {
     static Enemy skeleton() {
         Enemy skeleton = new Enemy(
                 "Skeleton",
-                75,
+                60,
                 100,
                 0,
                 0,
@@ -22,7 +22,7 @@ public class Enemies {
     static Enemy bear() {
         Enemy bear = new Enemy(
                 "Bear",
-                150,
+                80,
                 150,
                 30,
                 5,
@@ -39,7 +39,7 @@ public class Enemies {
     static Enemy rat() {
         Enemy rat = new Enemy(
                 "Rat",
-                50,
+                35,
                 50,
                 0,
                 10,
@@ -59,7 +59,7 @@ public class Enemies {
     static Enemy golem() {
         Enemy golem = new Enemy(
                 "Golem",
-                100,
+                70,
                 100,
                 60,
                 0,
@@ -75,7 +75,7 @@ public class Enemies {
     static Enemy webber() {
         Enemy webber = new Enemy(
                 "Webber",
-                60,
+                50,
                 100,
                 5,
                 10,
@@ -91,7 +91,7 @@ public class Enemies {
     static Enemy venomousWebber() {
         Enemy venomousWebber = new Enemy(
                 "Venomous Webber",
-                60,
+                40,
                 100,
                 0,
                 15,

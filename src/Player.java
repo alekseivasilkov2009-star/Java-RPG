@@ -15,7 +15,7 @@ public class Player extends Character{
     int NeededExperience = 100;
     int ExpMultiplier;
     int SellingMultiplier = 1;
-    int Gold = 0;
+    int Gold = 10000;
     int InventoryCapacity = 20;
     int CampaignProgress = 0;
 
@@ -67,11 +67,25 @@ public class Player extends Character{
     void setUpPlayer() {
         this.MaxHealth = 100;
         this.Health = MaxHealth;
-        this.Protection = 0;
+        this.Protection = 20;
         this.DamageOutput = 100;
         this.CurrentProtection = Protection;
         this.CurrentDamageOutput = DamageOutput;
         this.Speed = 20;
+        this.CurrentSpeed = Speed;
+        this.ProtectionSetup = 0;
+        this.DamageSetup = 0;
+    }
+
+    void clearPlayer() {
+        this.CurrentProtection = Protection;
+        this.CurrentDamageOutput = DamageOutput;
+        this.PoisonTurns = 0;
+        this.PoisonDamage = 0;
+        this.BleedingTurns = 0;
+        this.BleedDamage = 0;
+        this.StunTurns = 0;
+        this.StunFail = false;
         this.CurrentSpeed = Speed;
     }
 }

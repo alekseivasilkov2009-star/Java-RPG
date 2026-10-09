@@ -27,7 +27,7 @@ public class Event {
 
         System.out.println("At the market you see various goods. Your eye is caught by a adventurer trader that has everything, from spells to equipment.");
         System.out.println("Type 1 to buy a random spell that the trader has to offer\nType 2 to buy an upgrade for your damage output\nType 3 to buy an upgrade for your survivability\nType 4 to leave");
-
+        System.out.println(player.Gold);
         int choice;
 
         while (!scanner.hasNextInt()) {
@@ -42,15 +42,19 @@ public class Event {
             choice = scanner.nextInt();
         }
 
-        if (choice == 1) {
-            trader.getRandomSpell(player);
-        } else if (choice == 2) {
-            trader.upgradeDamage(player);
-        } else if (choice == 3) {
-            trader.upgradeProtection(player);
-        } else if (choice == 4) {
-            System.out.println("You leave the village...");
+        while (choice < 4) {
+            if (choice == 1) {
+                trader.getRandomSpell(player);
+            } else if (choice == 2) {
+                trader.upgradeDamage(player);
+            } else if (choice == 3) {
+                trader.upgradeProtection(player);
+            }
+            choice = scanner.nextInt();
         }
+
+        System.out.println("You leave the village...");
+
     }
 
     void camp(Player player) {
@@ -72,7 +76,9 @@ public class Event {
         System.out.println("The person was a "+ally.Name+" he will join you if your party isn't full already.");
         if (player.allies.size() < 4) {
             player.addAlly(ally);
+            player.addPartyMember(ally);
             System.out.println(ally.Name+" has joined your party!");
+            System.out.println(player.party.size());
         }
     }
 
