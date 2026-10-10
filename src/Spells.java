@@ -90,7 +90,7 @@ public class Spells {
     static Spell heal() {
         Spell spell = new Spell();
         spell.SpellName = "Heal";
-        spell.data.put("Heal", 25);
+        spell.data.put("Heal", 40);
 
         return spell;
     }

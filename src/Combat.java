@@ -47,14 +47,19 @@ public class Combat {
             player.addFoe(skeletonKnight);
         }
 
+        int fightRewardGold = 0;
+        int fightRewardExperience = 0;
+
         for (Character enemy : enemyParty) {
             fightParticipants.add(enemy);
+            fightRewardGold += enemy.MaxHealth;
+            fightRewardExperience += enemy.MaxHealth / 4;
         }
-
+        System.out.println("Enemy team:");
         for (Character ally : player.party) {
             fightParticipants.add(ally);
         }
-
+        System.out.println("Your team:");
         for (Character participant : fightParticipants) {
             System.out.println(participant.Name+":\n"+participant.Health+"/"+participant.MaxHealth+"\nDamage: "+participant.CurrentDamageOutput+"\nProtection: "+participant.CurrentProtection+"\nSpeed: "+participant.CurrentSpeed+"\n");
         }
@@ -128,7 +133,6 @@ public class Combat {
                             }
                         }
 
-                        System.out.println(chosenTarget.Name+" is chosen as the target for the "+currentSpell.SpellName+" spell!");
                         currentSpell.castSpell(player, chosenTarget);
                     } else {
                         Spell currentSpell = participant.spells.get(random.nextInt(participant.spells.size()));
@@ -163,6 +167,10 @@ public class Combat {
             for (Character playerPartyMember : player.party) {
                 playerPartyMember.clearCharacter();
             }
+            player.changeGold(fightRewardGold);
+            player.increaseExp(fightRewardExperience);
+            System.out.println("All enemies are defeated!\nYou've earned "+fightRewardGold+" gold!\nYou've earned "+fightRewardExperience+" experience!\nCurrent Gold: "+player.Gold+"| Current Experience: "+player.Experience);
+            scanner.nextLine();
         } else if (player.Alive && isBossFight) {
             player.CampaignProgress = 100;
             System.out.println("You've defeated the main boss and have beaten the game, congratulations!\n"+player.CampaignProgress+"% Campaign Progress");

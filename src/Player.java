@@ -61,6 +61,7 @@ public class Player extends Character{
             int excess = Experience - NeededExperience;
             Experience = excess;
             Level ++;
+            NeededExperience += 10;
         }
     }
 
@@ -75,17 +76,5 @@ public class Player extends Character{
         this.CurrentSpeed = Speed;
         this.ProtectionSetup = 0;
         this.DamageSetup = 0;
-    }
-
-    void clearPlayer() {
-        this.CurrentProtection = Protection;
-        this.CurrentDamageOutput = DamageOutput;
-        this.PoisonTurns = 0;
-        this.PoisonDamage = 0;
-        this.BleedingTurns = 0;
-        this.BleedDamage = 0;
-        this.StunTurns = 0;
-        this.StunFail = false;
-        this.CurrentSpeed = Speed;
     }
 }

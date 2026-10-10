@@ -48,6 +48,7 @@ public class Character {
             Health = 0;
             Alive = false;
         }
+        System.out.println(Name+" took "+finalDamage+" damage!");
     }
 
     void heal(int Heal) {
@@ -73,13 +74,11 @@ public class Character {
         if (BleedingTurns > 0) {
             BleedingTurns --;
             takeDamage(BleedDamage, true);
-            System.out.println(Name+" took "+BleedDamage+" bleed damage, this will last for another "+BleedingTurns+" turns!");
         }
 
         if (PoisonTurns > 0) {
             PoisonTurns --;
             takeDamage(PoisonDamage, true);
-            System.out.println(Name+" took "+PoisonDamage+" poison damage, this will last for another "+PoisonTurns+" turns!");
         }
 
         if (SpeedSetup > 0) {
@@ -111,8 +110,5 @@ public class Character {
 
         this.BleedDamage = 0;
         this.BleedingTurns = 0;
-
-        this.DamageSetup = 0;
-        this.ProtectionSetup = 0;
     }
 }
