@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class Game{
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Player player = new Player();
 
         Scanner scanner = new Scanner(System.in);

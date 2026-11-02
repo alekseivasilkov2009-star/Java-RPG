@@ -50,18 +50,20 @@ public class Combat {
         int fightRewardGold = 0;
         int fightRewardExperience = 0;
 
+        System.out.println("Enemy team:");
         for (Character enemy : enemyParty) {
             fightParticipants.add(enemy);
             fightRewardGold += enemy.MaxHealth;
             fightRewardExperience += enemy.MaxHealth / 4;
-        }
-        System.out.println("Enemy team:");
-        for (Character ally : player.party) {
-            fightParticipants.add(ally);
+            System.out.println(enemy.Name+":\n"+enemy.Health+"/"+enemy.MaxHealth+"\nDamage: "+enemy.CurrentDamageOutput+"\nProtection: "+enemy.CurrentProtection+"\nSpeed: "+enemy.CurrentSpeed+"\n");
         }
         System.out.println("Your team:");
+        for (Character ally : player.party) {
+            fightParticipants.add(ally);
+            System.out.println(ally.Name+":\n"+ally.Health+"/"+ally.MaxHealth+"\nDamage: "+ally.CurrentDamageOutput+"\nProtection: "+ally.CurrentProtection+"\nSpeed: "+ally.CurrentSpeed+"\n");
+
+        }
         for (Character participant : fightParticipants) {
-            System.out.println(participant.Name+":\n"+participant.Health+"/"+participant.MaxHealth+"\nDamage: "+participant.CurrentDamageOutput+"\nProtection: "+participant.CurrentProtection+"\nSpeed: "+participant.CurrentSpeed+"\n");
         }
 
         while (enemyParty.size() > 0 && player.Alive) {
